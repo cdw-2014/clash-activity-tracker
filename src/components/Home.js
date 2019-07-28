@@ -1,20 +1,20 @@
 import React from 'react'
 import { Switch, Route } from "react-router-dom"
-import { Grid, Input } from '@material-ui/core'
+import { Grid, Input, Button } from '@material-ui/core'
+import SignIn from './SignIn'
 
 export class Home extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            clanTag: "",
-            hashedPassword: ""
+            newUser: null
         }
     }
 
   render() {
     return (
-        <div>
+        <div>          
             <Grid item>
                 <h1>Clash Activity Tracker</h1>
             </Grid>  
@@ -27,15 +27,35 @@ export class Home extends React.Component {
                     container item xs={6}
                     direction="column"
                     alignItems="center"
+                    style={{padding: '20px'}}
                 >
                      <Grid item>
-                         <h4>Enter Clan Tag:</h4>
-                         <Input
-                            value={this.state.clanTag}
-                            onChange={ e => this.setState({clanTag: e.target.value}) }
-                         />
+                         <Button
+                            variant="contained"
+                            style={{width: window.innerWidth/4}}
+                            onClick={() => this.setState({ newUser: true })}
+                         >
+                             <h2>New User</h2>
+                         </Button>
                      </Grid>
                  </Grid>
+                 <Grid
+                    container item xs={6}
+                    direction="column"
+                    alignItems="center"
+                    style={{padding: '20px'}}
+                >
+                     <Grid item>
+                         <Button
+                            variant="contained"
+                            style={{width: window.innerWidth/4}}
+                            onClick={() => this.setState({ newUser: false })}
+                         >
+                             <h2>Returning User</h2>
+                         </Button>
+                     </Grid>
+                 </Grid>
+                 {this.state.newUser !== null ? <SignIn newUser={this.state.newUser} /> : null}
             </Grid>       
         </div>
     )

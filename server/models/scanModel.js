@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 
 var Schema = mongoose.Schema
 
-var activitySchema = new Schema({
+var scanSchema = new Schema({
   tag: { type: String, required: true },
   date: { type: Date, required: true },
   isOriginal: { type: Boolean, required: true },
@@ -14,4 +14,4 @@ var activitySchema = new Schema({
   lootEarned: { type: Number, required: false },
 })
 
-module.exports = mongoose.model('Activity', playerSchema );
+module.exports = mongoose.model('Scan', scanSchema );
