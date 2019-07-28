@@ -28,14 +28,14 @@ app.use('/clans', clanRoutes)
 mongoose.connect('mongodb+srv://cdw2014:'+process.env.DB_PASSWORD+'@clashtrack-hfv12.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
 
 const Discord = require('discord.js')
-const { prefix, token } = require('./discordConfig.json')
+// const { prefix, token } = require('./discordConfig.json')
 const client = new Discord.Client()
 client.once('ready', () => {
     console.log('Discord Ready!')
 })
 
 client.on("message", message => {
-    if(message.content.startsWith(`${prefix}clan`)) {
+    if(message.content.startsWith("~clan")) {
         let tag = message.content.substr(6).toUpperCase()
         let discord = message.guild.id.toString()
         let url = 'http://localhost:3001/clans/tag=' + tag + "&discord=" + discord
@@ -47,7 +47,7 @@ client.on("message", message => {
     }
 })
 
-client.login(token)
+client.login(process.env.DISCORD_TOKEN)
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
 
